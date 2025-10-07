@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BlogProps from "../components/BlogProps.astro";
+import TituloComponents from "../components/TituloComponents.astro";
+
+
+const articles = [
+  {
+    img: "assets/a3.jpeg",
+    alt: "Top 10 discos de rock alternativo",
+    title: "Top 10 discos de rock alternativo",
+    description:"Descubre los discos que han definido el sonido del rock alternativo a lo largo de los años.",
+    href: "blog/article1.html",
+    autor: "Daniel"
+  },
+  {
+    img: "assets/a3.jpeg",
+    alt: "Nuevo lanzamiento de Twenty One Pilots",
+    title: 'Nuevo lanzamiento de Twenty One Pilots "Breach"',
+    description:"Sumérgete en el mundo de Twenty One Pilots con “Breach”, lleno de ritmos urbanos y melodías pegajosas.",
+    href: "blog/article2.html",
+    autor: "Alejandro"
+  },
+  {
+    img: "assets/a3.jpeg",
+    alt: "5 canciones que no puedes dejar de escuchar este mes",
+    title: "5 canciones que no puedes dejar de escuchar este mes",
+    description:"Descubre las 5 canciones que no puedes dejar de escuchar este mes y dale play a lo mejor de la música actual.",
+    href: "blog/article3.html",
+    autor: "Navarrete"
+    
+  },
+  {
+    img: "assets/a3.jpeg",
+    alt: "5 canciones que no puedes dejar de escuchar este mes",
+    title: "5 canciones que no puedes dejar de escuchar este mes",
+    description:"Descubre las 5 canciones que no puedes dejar de escuchar este mes y dale play a lo mejor de la música actual.",
+    href: "blog/article3.html",
+    autor: "Barria"
+  },
+  {
+    img: "assets/a3.jpeg",
+    alt: "5 canciones que no puedes dejar de escuchar este mes",
+    title: "5 canciones que no puedes dejar de escuchar este mes",
+    description:"Descubre las 5 canciones que no puedes dejar de escuchar este mes y dale play a lo mejor de la música actual.",
+    href: "blog/article3.html",
+    autor: "Felipe Muñoz"
+  },
+  {
+    img: "assets/a3.jpeg",
+    alt: "5 canciones que no puedes dejar de escuchar este mes",
+    title: "5 canciones que no puedes dejar de escuchar este mes",
+    description:"Descubre las 5 canciones que no puedes dejar de escuchar este mes y dale play a lo mejor de la música actual.",
+    href: "blog/article3.html",
+    autor: "Erwin Gonzalez"
+  }
+];
+---
+
+<Layout>
+  <section class="container mx-auto">
+    <div class="w-full my-8 flex items-center">
+    <TituloComponents text="Ultimos Articulos" stilo="font-semibold text-black"/>
+    <div class="flex-1 h-[2px] bg-black ml-4"></div>
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 ">
+      {
+        articles.map((article) => (
+          <BlogProps
+            img={article.img}
+            alt={article.alt}
+            title={article.title}
+            description={article.description}
+            autor={article.autor}
+            href={article.href}
+          />
+        ))
+      }
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,18 @@
+---
+import { ItemMenu } from "../data/ItemMenu";
+---
+
+<nav>
+    <ul class="flex flex-row gap-x-[20px]">
+        {
+            ItemMenu.map((item)=>(
+                <li class="text-white text-[18px] uppercase hover:underline">
+                    <a href={item.href}>{item.texto}</a>
+                </li>
+            ))
+        }
+    </ul>
+
+
+
+</nav>

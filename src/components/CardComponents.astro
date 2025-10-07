@@ -1,0 +1,45 @@
+---
+interface Props {
+  href: string;
+  img: string;
+  alt: string;
+  title: string;
+  subtitle: string;
+  detail: string; 
+}
+
+const { href, img, alt, title, subtitle, detail } = Astro.props; // <-- Agregado
+---
+
+<a
+  href={href}
+  class="flex flex-col  border-gray-200 rounded-xl 
+         hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden"
+>
+   <div class="w-46 h-54 overflow-hidden">
+    <img
+      src={img}
+      alt={alt}
+      class="w-full h-full object-contain"
+    />
+  </div>
+
+  <div class="flex flex-col flex-grow p-4 text-center">
+    
+    <h3 class="text-gray-800 text-lg font-bold leading-tight mb-1 line-clamp-2">
+      {subtitle}
+    </h3>
+    
+    <p class="text-gray-500 text-sm font-medium mb-4">
+      {title}
+    </p>
+
+    <div class="mt-auto">
+      <button class="bg-orange-500 text-white font-bold py-2 px-6 rounded-lg 
+                     hover:bg-orange-600 transition-colors">
+        {detail}
+      </button>
+    </div>
+    
+  </div>
+</a>

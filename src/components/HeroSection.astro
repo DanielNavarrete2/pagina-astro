@@ -1,0 +1,19 @@
+---
+const images = [
+  { src: '/assets/hero1.jpg', alt: 'imagen de vinilos' },
+];
+
+const displayImage = images[0]; 
+---
+
+<div class="w-full max-w-5xl mx-auto overflow-hidden rounded-lg shadow-xl mt-10">
+    
+    <div class="h-[400px] w-full">
+        <img 
+            src={displayImage.src} 
+            alt={displayImage.alt} 
+            class="w-full h-full object-cover bg-gray-100 rounded-lg" 
+        />
+    </div>
+    
+</div>
