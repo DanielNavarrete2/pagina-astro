@@ -58,14 +58,14 @@ const articles = [
 ---
 
 <Layout>
-  <section class="container mx-auto">
-    <div class="w-full my-8 flex items-center">
+  <div class="container mx-auto">
+    <div class="w-full my-6 flex items-center ">
     <TituloComponents text="Ultimos Articulos" stilo="font-semibold text-black"/>
     <div class="flex-1 h-[2px] bg-black ml-4"></div>
     </div>
 
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 ">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       {
         articles.map((article) => (
           <BlogProps
@@ -79,5 +79,5 @@ const articles = [
         ))
       }
     </div>
-  </section>
+  </div>
 </Layout>
