@@ -5,41 +5,47 @@ interface Props {
   alt: string;
   title: string;
   subtitle: string;
-  detail: string; 
+  detail: string;
 }
 
-const { href, img, alt, title, subtitle, detail } = Astro.props; // <-- Agregado
+const { href, img, alt, title, subtitle, detail } = Astro.props;
 ---
-<div
-        class="flex flex-col border-gray-200 rounded-xl
-         hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden"
->
-    <div class="w-60 h-full overflow-hidden rounded-xl">
-        <img
-                src={img}
-                alt={alt}
-                class="w-full h-full object-cover"
-        />
-    </div>
 
-    <div class="flex flex-col flex-grow p-4 text-center">
-        <h3 class="text-gray-800 text-lg font-bold leading-tight mb-1 line-clamp-2">
-            {subtitle}
-        </h3>
+<div class="group w-72 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+  <!-- Imagen con overlay -->
+  <div class="relative h-64 overflow-hidden">
+    <img
+      src={img}
+      alt={alt}
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  </div>
 
-        <p class="text-gray-500 text-sm font-medium mb-4">
-            {title}
-        </p>
+  <!-- Contenido -->
+  <div class="p-6 flex flex-col gap-3">
+    <!-- Título -->
+    <h3 class="text-gray-900 text-xl font-bold leading-tight line-clamp-2 group-hover:text-orange-500 transition-colors">
+      {subtitle}
+    </h3>
 
-        <div class="mt-auto">
-            <a href={href}>
-                <button
-                        class="bg-orange-300 text-white font-bold py-2 px-6 rounded-lg
-                 hover:bg-orange-600 transition-colors cursor-pointer"
-                >
-                    {detail}
-                </button>
-            </a>
-        </div>
-    </div>
+    <!-- Subtítulo -->
+    <p class="text-gray-500 text-sm font-medium uppercase tracking-wide">
+      {title}
+    </p>
+
+    <!-- Separador decorativo -->
+    <div class="w-12 h-1 bg-orange-400 rounded-full"></div>
+
+    <!-- Botón -->
+    <a href={href} class="mt-2">
+      <button
+        class="w-full bg-gradient-to-r from-orange-400 to-orange-500 text-white font-semibold py-3 px-6 rounded-xl
+               hover:from-orange-500 hover:to-orange-600 transform hover:-translate-y-0.5
+               transition-all duration-300 shadow-md hover:shadow-xl"
+      >
+        {detail}
+      </button>
+    </a>
+  </div>
 </div>

@@ -1,0 +1,125 @@
+---
+interface Props {
+  itemsPerPage?: number;
+  gap?: number;
+}
+
+const { itemsPerPage = 4, gap = 8 } = Astro.props;
+const uniqueId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="carousel-container relative" data-carousel={uniqueId} data-items={itemsPerPage} data-gap={gap}>
+  <!-- Botón Anterior -->
+  <button
+    class="carousel-btn carousel-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+    aria-label="Anterior"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m15 18-6-6 6-6"/>
+    </svg>
+  </button>
+
+  <!-- Carrusel -->
+  <div class="overflow-hidden">
+    <div class="carousel-track flex transition-transform duration-500 ease-in-out" style={`gap: ${gap * 0.25}rem`}>
+      <slot />
+    </div>
+  </div>
+
+  <!-- Botón Siguiente -->
+  <button
+    class="carousel-btn carousel-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+    aria-label="Siguiente"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m9 18 6-6-6-6"/>
+    </svg>
+  </button>
+
+  <!-- Indicadores -->
+  <div class="carousel-indicators flex justify-center gap-2 mt-8">
+  </div>
+</div>
+
+<script>
+  function initCarousel() {
+    const containers = document.querySelectorAll('.carousel-container');
+    
+    containers.forEach(container => {
+      const track = container.querySelector('.carousel-track');
+      const prevBtn = container.querySelector('.carousel-prev');
+      const nextBtn = container.querySelector('.carousel-next');
+      const indicators = container.querySelector('.carousel-indicators');
+      
+      const itemsPerPage = parseInt(container.dataset.items) || 4;
+      const gap = parseInt(container.dataset.gap) || 8;
+      
+      const items = Array.from(track.children);
+      let currentIndex = 0;
+      const maxIndex = Math.max(0, items.length - itemsPerPage);
+      
+      // Configurar ancho de items
+      items.forEach(item => {
+        item.style.flexShrink = '0';
+        item.style.width = `calc((100% - ${(itemsPerPage - 1) * gap * 0.25}rem) / ${itemsPerPage})`;
+      });
+      
+      // Crear indicadores
+      indicators.innerHTML = '';
+      if (maxIndex > 0) {
+        for (let i = 0; i <= maxIndex; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'w-2 h-2 rounded-full transition-all bg-gray-300';
+          dot.setAttribute('aria-label', `Ir a página ${i + 1}`);
+          dot.addEventListener('click', function() {
+            goToIndex(i);
+          });
+          indicators.appendChild(dot);
+        }
+      }
+      
+      function updateCarousel() {
+        track.style.transform = `translateX(-${currentIndex * (100 / itemsPerPage)}%)`;
+        
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === maxIndex;
+        
+        const dots = indicators.querySelectorAll('button');
+        dots.forEach(function(dot, i) {
+          if (i === currentIndex) {
+            dot.className = 'w-8 h-2 rounded-full transition-all bg-black';
+          } else {
+            dot.className = 'w-2 h-2 rounded-full transition-all bg-gray-300';
+          }
+        });
+      }
+      
+      function goToIndex(index) {
+        currentIndex = Math.max(0, Math.min(index, maxIndex));
+        updateCarousel();
+      }
+      
+      prevBtn.addEventListener('click', function() {
+        goToIndex(currentIndex - 1);
+      });
+      
+      nextBtn.addEventListener('click', function() {
+        goToIndex(currentIndex + 1);
+      });
+      
+      updateCarousel();
+    });
+  }
+  
+  // Inicializar en carga de página
+  document.addEventListener('DOMContentLoaded', initCarousel);
+  
+  // Reinicializar en navegación de Astro
+  document.addEventListener('astro:page-load', initCarousel);
+</script>
+
+<style>
+  .carousel-container {
+    user-select: none;
+  }
+</style>

@@ -18,11 +18,6 @@ export const FooterData: FooterSection[] = [
       { text: "Vinilos clásicos", href: "#" },
       { text: "Playlists recomendadas", href: "#" }
   ]},
-  { title: "testeando", links: [
-      { text: "hola", href: "#" },
-      { text: "Vinilos clásicos", href: "#" },
-      { text: "Playlists recomendadas", href: "#" }
-  ]}
 ];
 
 

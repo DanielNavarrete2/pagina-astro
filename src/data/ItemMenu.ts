@@ -9,5 +9,5 @@ export const ItemMenu: items[]=[
     {href:"/blog", texto:"Blog"},
     {href:"/contact", texto:"Contacto"},
     {href:"/prueba", texto:"prueba"},
-    {href:"/test", texto:"test"},
+    {href:"/simpsons", texto:"simpsons"},
 ]
